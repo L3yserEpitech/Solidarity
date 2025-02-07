@@ -1,4 +1,4 @@
-# 🚀 CrowdChain - Plateforme de Crowdfunding Décentralisée  
+# 🚀 Solidarity - Plateforme de Crowdfunding Décentralisée  
 
 ## 📝 Description  
 **CrowdChain** est un système de **crowdfunding décentralisé** permettant de créer des levées de fonds avec **récompenses NFT et tokens** pour les contributeurs.
