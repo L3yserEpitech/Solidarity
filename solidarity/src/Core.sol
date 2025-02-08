@@ -17,6 +17,7 @@ contract Core {
     struct Contributor {
         address contributor;
         uint256 amount;
+        uint8 pourcentageTFV;
     }
     Contributor[] public contributors;
 
@@ -74,7 +75,7 @@ contract Core {
 
     function fundProject() public payable projectNotInProduction maxFundsNeededReached{
         require(msg.value > 0, "Amount must be greater than 0");
-        contributors.push(Contributor(msg.sender, msg.value));
+        contributors.push(Contributor(msg.sender, msg.value, 0));
         setFundsRaised(fundsRaised + msg.value);
         emit projectRefunded("Project has been refunded");
         if (fundsRaised >= fundsNeeded) {
@@ -93,6 +94,9 @@ contract Core {
 
     function startProjectProd() internal {
         projectInProd = true;
+        for (uint i = 0; i < contributors.length; i++) {
+            contributors[i].pourcentageTFV = uint8((contributors[i].amount * 100) / fundsRaised);
+        }
         emit ProjectStarted("Project is now in production");
     }
 
@@ -112,6 +116,15 @@ contract Core {
         for (uint256 i = 0; i < contributors.length; i++) {
             if (contributors[i].contributor == _contributor) {
                 return contributors[i].amount;
+            }
+        }
+        return 0;
+    }
+
+    function getPourcentageTFV(address _contributor) public view returns (uint8) {
+        for (uint256 i = 0; i < contributors.length; i++) {
+            if (contributors[i].contributor == _contributor) {
+                return contributors[i].pourcentageTFV;
             }
         }
         return 0;
