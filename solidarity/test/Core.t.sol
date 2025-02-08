@@ -153,4 +153,20 @@ contract CoreTest is Test {
         vm.expectRevert("Function not available yet");
         core.refundContributor();
     }
+
+    function testPourcentageTFV() public {
+        vm.deal(contributor1, 3 ether);
+        vm.deal(contributor2, 7 ether);
+
+        vm.prank(contributor1);
+        core.fundProject{value: 3 ether}();
+
+        assertEq(core.getPourcentageTFV(contributor1), 0);
+
+        vm.prank(contributor2);
+        core.fundProject{value: 7 ether}();
+
+        assertEq(core.getPourcentageTFV(contributor1), 30);
+        assertEq(core.getPourcentageTFV(contributor2), 70);
+    }
 }
