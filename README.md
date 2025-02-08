@@ -39,7 +39,7 @@
 
 ### 🔮 Smart Contracts Core  
 - [x] Structure de base du contrat de crowdfunding  
-- [x] Fonction de création de campagne (nom, supply, objectif, durée)  
+- [x] Fonction de création de campagne
 - [x] Système de contribution en ETH  
 - [x] Logique de calcul des pourcentages  
 - [x] Système de remboursement automatique  
